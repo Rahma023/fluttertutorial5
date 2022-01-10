@@ -12,27 +12,30 @@ class MyTextInput extends StatefulWidget{
 
 }
 class MyTextInputState extends State<MyTextInput>{
+  final TextEditingController controller=TextEditingController();
+
   String result="";
   @override
   Widget build(BuildContext context){
     return Scaffold(
-      appBar: AppBar(title: Text("Input Text"),backgroundColor: Colors.blueGrey,),
+      appBar: AppBar(title: const Text("Input Text"),backgroundColor: Colors.blueGrey,),
       body: Container(
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               TextField(
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   hintText: "Text In Here"
 
                 ),
-                onChanged: (String str){
+                onSubmitted: (String str){
                   setState(() {
-                    result=str;
-                    
+                    result=result+"\n"+str;
                   });
+                  controller.text="";
                 },
+               controller: controller,
               ),
               Text(result)
             ],
